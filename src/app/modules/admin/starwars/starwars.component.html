@@ -1,10 +1,8 @@
 <div class="sm:absolute sm:inset-0 flex flex-col flex-auto min-w-0 sm:overflow-hidden bg-card dark:bg-transparent">
 
-    <app-people></app-people>
+
 
     <!--<app-lazy-load></app-lazy-load>-->
-
-
     <!-- Header -->
     <div class="relative flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between py-8 px-6 md:px-8 border-b">
         <!-- Loader -->
@@ -15,9 +13,9 @@
         <!-- Title -->
         <div class="text-4xl font-extrabold tracking-tight">STAR WARS</div>
         <!-- Actions -->
-        <div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">
+        <!--<div class="flex flex-shrink-0 items-center mt-6 sm:mt-0 sm:ml-4">-->
             <!-- Search -->
-            <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript min-w-200">
+            <!--<mat-form-field class="fuse-mat-dense fuse-mat-no-subscript min-w-200">
                 <mat-icon matPrefix
                           [svgIcon]="'heroicons_outline:search'"></mat-icon>
                 <input matInput
@@ -25,20 +23,22 @@
                        [autocomplete]="'off'"
                        [placeholder]="'Search'">
             </mat-form-field>
-        </div>
+        </div>-->
     </div>
 
+    <app-people></app-people>
+
     <!--Main-->
-    <div class="flex flex-auto overflow-hidden">
+    <!--<div class="flex flex-auto overflow-hidden">-->
 
         <!-- Products list -->
-        <div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
+        <!--<div class="flex flex-col flex-auto sm:mb-18 overflow-hidden sm:overflow-y-auto">
             <ng-container *ngIf="(listPeople$ | async) as listpeople">
                 <ng-container *ngIf="listpeople.length > 0; else noProducts">
 
-                    <div class="grid">
+                    <div class="grid">-->
                         <!-- Header -->
-                        <div class="inventory-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
+                        <!--<div class="inventory-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
                              matSort
                              matSortDisableClear>
                             <div></div>
@@ -63,38 +63,38 @@
                                 Skin Color
                             </div>
                             <div class="hidden sm:block">Details</div>
-                        </div>
+                        </div>-->
                         <!--Rows-->
-                        <ng-container>
+                        <!--<ng-container>
 
                             <ng-container *ngFor="let people of listpeople.results; trackBy: trackByFn">
 
                                 <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
-                                    <div></div>
+                                    <div></div>-->
                                     <!--NAME-->
-                                    <div class="hidden md:block truncate">
+                                    <!--<div class="hidden md:block truncate">
                                         {{people.name}}
-                                    </div>
+                                    </div>-->
 
                                     <!--Height-->
-                                    <div class="truncate">
+                                    <!--<div class="truncate">
                                         {{people.height}}
-                                    </div>
+                                    </div>-->
 
                                     <!--Mass-->
-                                    <div class="truncate">
+                                    <!--<div class="truncate">
                                         {{people.mass}}
-                                    </div>
+                                    </div>-->
 
                                     <!--Hair Color-->
-                                    <div class="truncate">
+                                    <!--<div class="truncate">
                                         <div>{{people.hair_color}}</div>
                                     </div>
 
                                     Skin Color
                                     <div class="truncate">
                                         {{people.skin_color}}
-                                    </div>
+                                    </div>-->
 
                                     <!--Details button-->
                                     <!--<div>
@@ -105,15 +105,15 @@
                                     [svgIcon]="selectedProduct?.id === product.id ? 'heroicons_solid:chevron-up' : 'heroicons_solid:chevron-down'"></mat-icon>
                                     </button>
                                     </div>-->
-                                </div>
+                                <!--</div>-->
                                 <!--<div class="grid">
                                     <ng-container *ngIf="selectedProduct?.id === product.id">
                                         <ng-container *ngTemplateOutlet="rowDetailsTemplate; context: {$implicit: product}"></ng-container>
                                     </ng-container>
                                 </div>-->
-                            </ng-container>
+                            <!--</ng-container>
                         </ng-container>
-                    </div>
+                    </div>-->
 
                     <!--<mat-paginator class="sm:absolute sm:inset-x-0 sm:bottom-0 border-b sm:border-t sm:border-b-0 z-10 bg-gray-50 dark:bg-transparent"
                     [ngClass]="{'pointer-events-none': isLoading}"
@@ -123,8 +123,8 @@
                     [pageSizeOptions]="[5, 10, 25, 100]"
                     [showFirstLastButtons]="true"></mat-paginator>-->
 
-                </ng-container>
-            </ng-container>
+                <!--</ng-container>
+            </ng-container>-->
 
             <!--<ng-template #rowDetailsTemplate
                          let-product>
@@ -389,13 +389,13 @@
                 </div>
             </ng-template>-->
 
-            <ng-template #noProducts>
+            <!--<ng-template #noProducts>
                 <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">There are no products!</div>
             </ng-template>
 
         </div>
 
-    </div>
+    </div>-->
 
 
 

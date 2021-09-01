@@ -15,8 +15,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 
 @Component({
-  selector: 'app-people',
-  templateUrl: './people.component.html',
+    selector: 'app-people',
+    templateUrl: './people.component.html',
     styleUrls: ['./people.component.scss'],
     animations: [
         trigger('detailExpand', [
@@ -50,6 +50,10 @@ export class PeopleComponent implements OnInit {
 
     selectedPeopleForm: FormGroup;
 
+    films: string[] = [];
+    species: string[] = [];
+    vehicles: string[] = [];
+    starships: string[] = [];
 
     constructor(
         private _starwarsService: StarwarsService,
@@ -60,41 +64,23 @@ export class PeopleComponent implements OnInit {
 
     ngOnInit(): void {
 
-        // Create the selected people form
-        this.selectedPeopleForm = this._formBuilder.group({
-            name: [''],
-            height: [''],
-            mass: ['', [Validators.required]],
-            hair_color: [''],
-            skin_color: [[]],
-            birth_year: [''],
-            gender: [''],
-            homeworld: [''],
-            films: [[]],
-            species: [[]],
-            vehicles: [[]],
-            starships: [[]],
-            created: [''],
-            edited: [''],
-            url: ['']
-        });
-
+        this.initializedSelectedRow();
 
         this._starwarsService.getPeopleList().subscribe(res => {
             this.listPeople = res;
 
-                this.dataSource = new MatTableDataSource<People>(this.getTableData(this.start, this.end));
+            this.dataSource = new MatTableDataSource<People>(this.getTableData(this.start, this.end));
 
-                this.dataSource.sort = this.sort;
+            this.dataSource.sort = this.sort;
 
-                this.updateIndex();
+            this.updateIndex();
         });
 
 
     }
 
     onTableScroll(e) {
-/*        console.log(e)*/
+        /*        console.log(e)*/
         const tableViewHeight = e.target.offsetHeight // viewport
         const tableScrollHeight = e.target.scrollHeight // length of all table
         const scrollLocation = e.target.scrollTop; // how far user scrolled
@@ -118,7 +104,7 @@ export class PeopleComponent implements OnInit {
     getTableData(start, end) {
 
         var peoplelist = this.listPeople.filter((value, index) => index >= start && index < end);
-        
+
         return peoplelist;
     }
 
@@ -127,10 +113,36 @@ export class PeopleComponent implements OnInit {
         this.end = this.limit + this.start;
     }
 
-    selectedRow(row, row1) {
-        /*console.log('selectedRow', row, ' >>> Index : ', i) // why index is undefined???*/
+    selectedRow(row) {
 
-        console.log('row  >>', row, 'row1 >>>', row1);
+        if (!row) {
+            this.initializedSelectedRow();
+            return;
+        }
+
+        this.setArrayFields(row);
+
+        // Set selected row to People form value
+        this.selectedPeopleForm.setValue({
+            name: row.name,
+            height: row.height,
+            mass: row.mass,
+            hair_color: row.hair_color,
+            skin_color: row.skin_color,
+            birth_year: row.birth_year,
+            gender: row.gender,
+            homeworld: row.homeworld,
+            films: row.films,
+            species: row.species,
+            vehicles: row.vehicles,
+            starships: row.starships,
+            created: row.created,
+            edited: row.edited,
+            url: row.url
+        });
+
+        this.disableControls(this.selectedPeopleForm);
+
     }
 
     applyFilter(event: Event) {
@@ -138,5 +150,54 @@ export class PeopleComponent implements OnInit {
 
         this.dataSource.filter = filterValue.trim().toLowerCase();
     }
+
+    initializedSelectedRow() {
+
+        // Create the selected people form
+        this.selectedPeopleForm = this._formBuilder.group({
+            name: [''],
+            height: [''],
+            mass: ['', [Validators.required]],
+            hair_color: [''],
+            skin_color: [[]],
+            birth_year: [''],
+            gender: [''],
+            homeworld: [''],
+            films: [[]],
+            species: [[]],
+            vehicles: [[]],
+            starships: [[]],
+            created: [''],
+            edited: [''],
+            url: ['']
+        });
+
+    }
+
+    setArrayFields(row) {
+
+        this.films = [...row.films];
+        this.species = [...row.species];
+        this.vehicles = [...row.vehicles];
+        this.starships = [...row.starships];
+
+    }
+
+    disableControls(rowData: FormGroup) {
+
+        rowData.get('name').disable();
+        rowData.get('height').disable();
+        rowData.get('mass').disable();
+        rowData.get('hair_color').disable();
+        rowData.get('skin_color').disable();
+        rowData.get('birth_year').disable();
+        rowData.get('gender').disable();
+        rowData.get('homeworld').disable();
+        rowData.get('edited').disable();
+        rowData.get('created').disable();
+        rowData.get('url').disable();
+
+    }
+
 
 }
